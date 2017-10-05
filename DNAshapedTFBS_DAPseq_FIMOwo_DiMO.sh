@@ -4,9 +4,9 @@
 
 #Define location of the scripts and results directory
 
-path_scripts=/storage/mathelierarea/processed/Victor/scripts
-results_data=/storage/mathelierarea/processed/Victor/results/DAP_DNAshape
-results_shared=/storage/mathelierarea/processed/Victor/results
+path_scripts=../scripts
+results_data=../results/DAP_DNAshape
+results_shared=../results
 
 read -r -d '' HELP <<EOF
 usage: 
@@ -181,7 +181,7 @@ nsites=${tmp2%%" E"}
 ### Launching FIMO on train + test ###############################################
 ### FIMO to find best hits positions for the motif on each sequence ##########################################
 ls $folder/foreground/train/bed/T*.bed | xargs -I{} --max-proc=10 bash -c \
-'	path_scripts=/storage/mathelierarea/processed/Victor/scripts
+'	path_scripts=../scripts
 	
 	folder=$0
 	meme_motif=$1

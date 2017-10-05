@@ -4,9 +4,9 @@
 
 #Define location of the scripts and results directory
 
-../scripts
-../results/DAP_DNAshape
-../results
+path_scripts=../scripts
+results_data=../results/DAP_DNAshape
+results_shared=../results
 
 read -r -d '' HELP <<EOF
 usage: 
@@ -205,8 +205,8 @@ fi
 ### Launching DiMO on train sets and then FIMO on train + test ###############################################
 ### DiMO motif optimization on training datasets #############################################################
 ### FIMO to find best hits positions for the motif on each sequence ##########################################
-ls $folder/foreground/train/bed/T*.bed | xargs -I{} --max-proc=10 bash -c \
-../scripts
+ls $folder/foreground/train/bed/T0.bed | xargs -I{} --max-proc=1 bash -c \
+'	path_scripts=../scripts
 	
 	folder=$0
 	dimo_matrix_in=$1
@@ -276,7 +276,7 @@ ls $folder/foreground/train/bed/T*.bed | xargs -I{} --max-proc=10 bash -c \
 	if [ -z "$(ls -A $fimo_dir/predictions/)" ]; then  
 		
 		Rscript $path_scripts/launch_DiMO.R $methylation_FIMO $fg_train_fasta $bg_train_fasta $dimo_matrix_in $dimo_out_name
-		
+		read
 		sed "1d" $dimo_matrix_out | cut -d" " -f3- > $matrix_out
 		
 		if [ $meme_alphabet = false ]; then

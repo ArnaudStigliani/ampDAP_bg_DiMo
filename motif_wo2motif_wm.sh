@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-data=/storage/mathelierarea/processed/Victor/data
+data=../data
 
 genome=$data/Arabidopsis_thaliana.TAIR10.dna.genome.fa
 methyl_genome=$data/AraTha_TAIR10_methyl_genome.fa

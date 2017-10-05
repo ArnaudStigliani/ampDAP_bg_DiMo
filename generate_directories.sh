@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-results_data=/storage/mathelierarea/processed/Victor/results/DAP_DNAshape
+results_data=../results/DAP_DNAshape
 
 read -r -d '' HELP <<EOF
 usage: 

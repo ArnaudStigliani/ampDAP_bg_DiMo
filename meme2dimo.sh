@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-path_scripts=/storage/mathelierarea/processed/Victor/scripts
-results_data=/storage/mathelierarea/processed/Victor/results/DAP_DNAshape
-results_shared=/storage/mathelierarea/processed/Victor/results
+path_scripts=../scripts
+results_data=../results/DAP_DNAshape
+results_shared=../results
 
 
 motif_input=$1

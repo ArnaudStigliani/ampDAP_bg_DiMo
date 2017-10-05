@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-path_scripts=/storage/mathelierarea/processed/Victor/scripts
+path_scripts=../scripts
 path_DNAshapedTFBS=/storage/scratch/victor/DNAshape/src/DNAshapedTFBS_modified	#local
 path_BiasAway=/lsc/BiasAway
-results_data=/storage/mathelierarea/processed/Victor/results/DAP_DNAshape
-results_shared=/storage/mathelierarea/processed/Victor/results
-data=/storage/mathelierarea/processed/Victor/data
+results_data=../results/DAP_DNAshape
+results_shared=../results
+data=../data
 
 read -r -d '' HELP <<EOF
 usage: 

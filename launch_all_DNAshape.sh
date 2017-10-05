@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 
->>../results/stderr.txt
->>../results/stdout.txt
+>../results/stderr.txt
+>../results/stdout.txt
 
 path_scripts=/storage/mathelierarea/processed/arnaudst/ampDAP_bg_DiMO/scripts
 data=/storage/mathelierarea/processed/arnaudst/data
@@ -20,7 +20,8 @@ chr_lengths=$data/AraTha_chr_length.genome
 
 # ls -d $data/dap_data_v4/peaks/[N-Z]*/* | grep "colamp" | sed -e 's/_colamp.*//g' | xargs -I{} --max-proc=8 bash -c \
 ls -d $data/dap_data_v4/peaks/C2H2_tnt/At5g66730_colamp_a | grep "colamp" | sed -e 's/_colamp.*//g' | xargs -I{} --max-proc=5 bash -c \
-'
+
+function process{
 	path_scripts=/storage/mathelierarea/processed/arnaudst/ampDAP_bg_DiMO/scripts
 	data=/storage/mathelierarea/processed/arnaudst/data
 	results_shared=/storage/mathelierarea/processed/arnaudst/ampDAP_bg_DiMO/results
@@ -94,7 +95,8 @@ ls -d $data/dap_data_v4/peaks/C2H2_tnt/At5g66730_colamp_a | grep "colamp" | sed 
 	else 
 	        echo "$nb_peaks peaks for $TF_name from $TF_family, not enough to compute"
 	fi
-' 
+}
+ 
 #  $genome $methyl_genome $methyl_alphabet $chr_lengths -- {} 1>>$results_shared/stdout.txt 2>>$results_shared/stderr.txt
 
 #python $path_scripts/plot_graphs.py $results_shared/DAP_DNAshape/AUPRC_scores.txt $results_shared/DAP_DNAshape/AUROC_scores.txt $data/methyl_sensitivity.tsv

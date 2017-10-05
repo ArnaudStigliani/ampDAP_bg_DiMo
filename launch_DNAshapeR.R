@@ -6,10 +6,10 @@
 ###The output will then contain lines of coma separeted values for each shape of the list and for each position of each sequence (one line per sequence)
 
 
-working_dir <- "/storage/mathelierarea/processed/Victor"
+working_dir <- ".."
 setwd(working_dir)
 
-suppressMessages(library(DNAshapeR, lib.loc = "~/R/x86_64-redhat-linux-gnu-library/3.3/"))
+suppressMessages(library(DNAshapeR, lib.loc = "~/.R/"))
 
 args <- commandArgs(trailingOnly=TRUE)
 

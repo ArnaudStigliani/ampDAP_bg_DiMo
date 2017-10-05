@@ -6,7 +6,7 @@
 ### The output will then contain the optimized motif matrix
 
 
-working_dir <- "/storage/mathelierarea/processed/Victor"
+working_dir <- ".."
 setwd(working_dir)
 
 args <- commandArgs(trailingOnly=TRUE)
@@ -18,9 +18,9 @@ matrix_in <- args[4]
 output_name <- args[5]
 
 if (eval(methylation)){
-  library(DiMO.methyl.AUPRC, lib.loc = "~/R/x86_64-redhat-linux-gnu-library/3.3/")
+  library(DiMO.methyl.AUPRC, lib.loc = "~/.R/")
 } else {
-  library(DiMO.AUPRC, lib.loc = "~/R/x86_64-redhat-linux-gnu-library/3.3/")
+  library(DiMO.AUPRC, lib.loc = "~/.R/")
 }
 
 DiMO(
