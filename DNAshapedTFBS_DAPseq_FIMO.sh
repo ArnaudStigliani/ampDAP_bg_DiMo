@@ -178,8 +178,6 @@ tmp2=${tmp##" "}
 nsites=${tmp2%%" E"}
 
 
-
-
 if ([ $from_methyl = true ] && [ $methylation_FIMO = true ]); then
 	dimo_folder=$results_data/$TF_family/$TF_name/from_methyl/wm_DiMO
 elif ([ $from_methyl = true ] && [ $methylation_FIMO = false ]); then
@@ -205,7 +203,7 @@ fi
 ### Launching DiMO on train sets and then FIMO on train + test ###############################################
 ### DiMO motif optimization on training datasets #############################################################
 ### FIMO to find best hits positions for the motif on each sequence ##########################################
-ls $folder/foreground/train/bed/T0.bed | xargs -I{} --max-proc=1 bash -c \
+ls $folder/foreground/train/bed/T*.bed | xargs -I{} --max-proc=10 bash -c \
 '	path_scripts=../scripts
 	
 	folder=$0
@@ -273,26 +271,27 @@ ls $folder/foreground/train/bed/T0.bed | xargs -I{} --max-proc=1 bash -c \
 	new_meme_motif=$meme_dir/optimized_motif_$indx.txt
 	new_motif_logo=$meme_dir/optimized_motif_logo_$indx.png
 	
+       echo "fimo_dir : " $fimo_dir
 	if [ -z "$(ls -A $fimo_dir/predictions/)" ]; then  
 		
 		Rscript $path_scripts/launch_DiMO.R $methylation_FIMO $fg_train_fasta $bg_train_fasta $dimo_matrix_in $dimo_out_name
-		read
 		sed "1d" $dimo_matrix_out | cut -d" " -f3- > $matrix_out
-		
+	        sed -i "s/\./,/g" $matrix_out
 		if [ $meme_alphabet = false ]; then
 			cat $matrix_out | matrix2meme -dna -numseqs $motif_nsites -bg $motif_bg > $new_meme_motif
 		else
 			cat $matrix_out | matrix2meme -alph $meme_alphabet -numseqs $motif_nsites -bg $motif_bg > $new_meme_motif 
 		fi
+	        sed -i "s/,/./g" $new_meme_motif
 		ceqlogo -i1 $new_meme_motif -o $new_motif_logo -f PNG
-	
+		
 		
 		bash $path_scripts/predict_fimo.sh $new_meme_motif $fg_train_bed $fg_train_fasta $fg_train_FIMO_out
 		python $path_scripts/reshape_fimo.py $fg_train_FIMO_out $fg_train_FIMO_pred
-		
+			
 		bash $path_scripts/predict_fimo.sh $new_meme_motif $bg_train_bed $bg_train_fasta $bg_train_FIMO_out
 		python $path_scripts/reshape_fimo.py $bg_train_FIMO_out	$bg_train_FIMO_pred
-		
+			
 		bash $path_scripts/predict_fimo.sh $new_meme_motif $fg_test_bed $fg_test_fasta $fg_test_FIMO_out
 		python $path_scripts/reshape_fimo.py $fg_test_FIMO_out $fg_test_FIMO_pred
 		
@@ -305,7 +304,8 @@ ls $folder/foreground/train/bed/T0.bed | xargs -I{} --max-proc=1 bash -c \
 						
 ' $folder $dimo_matrix_in $from_methyl $methylation_FIMO $nsites $motif_bg $meme_alphabet -- {} 
 
-
+echo "ok"
+		
 
 
 bash $path_scripts/train_PSSM_DNAshape.sh $folder $from_methyl $methylation_shapes $methylation_FIMO
