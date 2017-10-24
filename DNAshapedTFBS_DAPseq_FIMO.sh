@@ -203,7 +203,7 @@ fi
 ### Launching DiMO on train sets and then FIMO on train + test ###############################################
 ### DiMO motif optimization on training datasets #############################################################
 ### FIMO to find best hits positions for the motif on each sequence ##########################################
-ls $folder/foreground/train/bed/T*.bed | xargs -I{} --max-proc=10 bash -c \
+ls $folder/foreground/train/bed/T0.bed | xargs -I{} --max-proc=1 bash -c \
 '	path_scripts=../scripts
 	
 	folder=$0

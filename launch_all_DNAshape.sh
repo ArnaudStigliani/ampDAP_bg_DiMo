@@ -56,6 +56,8 @@ function process
 	
 	bash $path_scripts/DNAshapedTFBS_DAPseq_FIMO.sh -f $TF_family -n $TF_name -p $peaks_fg -b $peaks_bg -g $genome -c $methyl_genome -a $methyl_alphabet -y -q -t -l $chr_lengths -r $results_DAP
 	
+	exit 0
+	
 	echo "TF $TF_name from $TF_family w/ methylation for hits and shapes from methylated motif: Done"
 	
 	bash $path_scripts/DNAshapedTFBS_DAPseq_FIMO.sh -f $TF_family -n $TF_name -p $peaks_fg -b $peaks_bg -g $genome -c $methyl_genome -a $methyl_alphabet -y -q -l $chr_lengths -r $results_DAP
