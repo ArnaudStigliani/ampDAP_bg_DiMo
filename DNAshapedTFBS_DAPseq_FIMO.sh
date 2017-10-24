@@ -276,13 +276,11 @@ ls $folder/foreground/train/bed/T*.bed | xargs -I{} --max-proc=10 bash -c \
 		
 		Rscript $path_scripts/launch_DiMO.R $methylation_FIMO $fg_train_fasta $bg_train_fasta $dimo_matrix_in $dimo_out_name
 		sed "1d" $dimo_matrix_out | cut -d" " -f3- > $matrix_out
-	        sed -i "s/\./,/g" $matrix_out
 		if [ $meme_alphabet = false ]; then
 			cat $matrix_out | matrix2meme -dna -numseqs $motif_nsites -bg $motif_bg > $new_meme_motif
 		else
 			cat $matrix_out | matrix2meme -alph $meme_alphabet -numseqs $motif_nsites -bg $motif_bg > $new_meme_motif 
 		fi
-	        sed -i "s/,/./g" $new_meme_motif
 		ceqlogo -i1 $new_meme_motif -o $new_motif_logo -f PNG
 		
 		

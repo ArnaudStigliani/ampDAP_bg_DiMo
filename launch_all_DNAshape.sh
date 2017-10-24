@@ -101,6 +101,6 @@ export -f process
 
 
 #ls -d $data/dap_data_v4/peaks/*/* | grep "colamp" | sed -e 's/_colamp.*//g' | xargs -I{} --max-proc=8 bash -c \
-# ls -d $data/dap_data_v4/peaks/[N-Z]*/* | grep "colamp" | sed -e 's/_colamp.*//g' | xargs -I{} --max-proc=8 bash -c \
-ls -d $data/dap_data_v4/peaks/C2H2_tnt/At5g66730_colamp_a | grep "colamp" | sed -e 's/_colamp.*//g' | xargs -I{} --max-proc=5 bash -c 'process {}'
+#ls -d $data/dap_data_v4/peaks/[N-Z]*/* | grep "colamp" | sed -e 's/_colamp.*//g' | xargs -I{} --max-proc=3 bash -c 'process {}'
+ls -d $data/dap_data_v4/peaks/C2H2_tnt/At5g66730_colamp_a | grep "colamp" | sed -e 's/_colamp.*//g' | xargs -I{} bash -c 'process {}'
 
